@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- GOOGLE FONTS  -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+  <!-- GOOGLE FONTS END -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+
+<body>
+  <section class="chritmas-sec">
+    <img src="assets/images/tree.webp" alt="image" class="chritsmas-treee">
+    <div class="wisyou-events">
+      <div class="treess">
+        
+      </div>
+      <h6 class="mini-heading">We wish you</h6>
+      <h1 class="main-headings">Merry Christmas</h1>
+    </div>
+    <canvas id="snow-canvas"></canvas>
+
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="sliderholders data-1">
+            <img src="assets/images/2santa-yoga-sl-bg-2.jpg" alt="images" class="bg-image">
+            <img src="assets/images/2santa-yoga.png" alt="images" class="main-image">
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="sliderholders data-2">
+            <img src="assets/images/santa-1-sl-bg-1.webp" alt="images" class="bg-image">
+            <img src="assets/images/santa-1.webp" alt="images" class="main-image">
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="sliderholders data-3">
+            <img src="assets/images/santa-skate-sl-bg-5.webp" alt="images" class="bg-image">
+            <img src="assets/images/santa-skate.webp" alt="images" class="main-image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      loop: true,
+      effect: "fade",
+      fadeEffect: { crossFade: true },
+      autoplay: {
+        delay: 5000,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      }
+    });
+
+  </script>
+
+  <script>
+    const canvas = document.getElementById('snow-canvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    class Snowflake {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 4 + 1; // Size
+        this.speed = Math.random() * 1 + 0.5; // Falling speed
+        this.wind = Math.random() * 0.5 - 0.25; // Horizontal movement
+        this.opacity = Math.random() * 0.5 + 0.3; // Transparency
+      }
+
+      update() {
+        this.y += this.speed;
+        this.x += this.wind;
+        if (this.y > canvas.height) this.reset();
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    // Create particles
+    const snowflakes = [];
+    const numberOfSnowflakes = 200;
+    for (let i = 0; i < numberOfSnowflakes; i++) {
+      snowflakes.push(new Snowflake());
+    }
+
+    // Animation loop
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      snowflakes.forEach(snowflake => {
+        snowflake.update();
+        snowflake.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+
+</html>

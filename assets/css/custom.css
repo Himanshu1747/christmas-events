@@ -30,7 +30,8 @@ img {
 }
 
 .sliderholders {
-    height: 919px;
+    /* height: 919px; */
+    min-height: 100vh;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -273,9 +274,9 @@ img.chritsmas-treee {
 
 
 @media(max-width:1600px) {
-    .sliderholders {
+    /* .sliderholders {
         height: 739px;
-    }
+    } */
 
     .sliderholders.data-2 img.main-image {
         max-width: 800px;
@@ -295,9 +296,9 @@ img.chritsmas-treee {
 }
 
 @media(max-width:1400px) {
-    .sliderholders {
+    /* .sliderholders {
         height: 607px;
-    }
+    } */
 
     .sliderholders.data-2 img.main-image {
         max-width: 680px;
@@ -321,9 +322,9 @@ img.chritsmas-treee {
 }
 
 @media(max-width:991px) {
-    .sliderholders {
+    /* .sliderholders {
         height: 550px;
-    }
+    } */
 
     .main-headings {
         font-size: 65px;
